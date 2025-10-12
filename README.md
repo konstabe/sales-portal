@@ -24,8 +24,6 @@ http://localhost:5000
 
 ## MongoDB через UI будет доступна по урлу:
 
-## Swagger будет доступен по урлу:
-
 http://localhost:8081
 
 ### Креды для входа в базу:
@@ -38,8 +36,12 @@ admin
 
 admin
 
+## Swagger будет доступен по урлу:
+
 http://localhost:5000/api/docs
 
 ## Для остановки контейнера:
 
+```
 docker-compose down -v
+```
