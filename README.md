@@ -4,6 +4,12 @@
 docker-compose up --build
 ```
 
+# Для остановки контейнера:
+
+```
+docker-compose down -v
+```
+
 ## Фронтенд будет доступен по урлу:
 
 http://localhost:8585
@@ -20,7 +26,11 @@ admin123
 
 ## Бэкэнд будет доступен по урлу:
 
-http://localhost:5000
+http://localhost:8686
+
+## Swagger будет доступен по урлу:
+
+http://localhost:5000/api/docs
 
 ## MongoDB через UI будет доступна по урлу:
 
@@ -35,13 +45,3 @@ admin
 ### Password:
 
 admin
-
-## Swagger будет доступен по урлу:
-
-http://localhost:5000/api/docs
-
-## Для остановки контейнера:
-
-```
-docker-compose down -v
-```
