@@ -30,7 +30,7 @@ http://localhost:8686
 
 ## Swagger будет доступен по урлу:
 
-http://localhost:5000/api/docs
+http://localhost:8686/api/docs
 
 ## MongoDB через UI будет доступна по урлу:
 
