@@ -13,3 +13,7 @@ interface Product {
 interface ProductResponse extends BaseResponseBody {
     "Product": Product
 }
+
+interface ProductListResponse extends BaseResponseBody {
+    "Products": Product[],
+}
