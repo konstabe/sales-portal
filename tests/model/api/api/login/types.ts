@@ -10,3 +10,8 @@ interface User {
 interface LoginResponse extends BaseResponseBody {
     "User": User
 }
+
+interface LoginPayload {
+    "username": string,
+    "password": string
+}

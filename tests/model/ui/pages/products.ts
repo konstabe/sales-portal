@@ -1,7 +1,8 @@
 import { Page } from "@playwright/test";
 import { AbstractPage } from "./abstract/abstract";
-import { waitForResponseJson } from "../common/helpers";
+
 import { faker } from "@faker-js/faker";
+import { waitForResponseJson } from "../common/helpers";
 
 
 export class Products extends AbstractPage {

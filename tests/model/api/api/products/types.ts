@@ -1,4 +1,4 @@
-type ProductPayload = Pick<Product, "name" | "amount" | "price" | "manufacturer">;
+type ProductPayload = Pick<Product, "name" | "amount" | "price" | "manufacturer" | "notes">;
 
 interface Product {
     "name": string,

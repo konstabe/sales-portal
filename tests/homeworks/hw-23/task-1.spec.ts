@@ -1,4 +1,4 @@
-import { test, expect } from "../../model/fixtures/fixture";
+import { test, expect } from "../../model/ui/fixtures/fixture";
 import dotenv from "dotenv";
 
 dotenv.config();

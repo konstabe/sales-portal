@@ -1,61 +1,29 @@
 // Написать смоук API тест на получение всех продуктов (без фильтрационных параметров) со следующими шагами:
 //   - проверить, что в массиве тела респонса есть созданный продукт
 
-import { test, expect } from "../../model/fixtures/fixture";
-import { loginAndReturnToken } from "../../model/api/methods/apiLogin";
-import { createRandomProductData } from "../../model/api/methods/createProductData";
-import { apiConfig, STATUS_CODES } from "../../model/api/config";
-import { validateResponse } from "../../model/common/utils";
-import { createProductSchema, getProductsSchema } from "../../model/schemas/product/productSchema";
-import { getTypedJson } from "../../model/api/methods/getTypedJson";
+import { test } from "./common/fixtures";
+import { expect } from "@playwright/test";
 
 
-test(`product_api`,{tag:["@smoke, @api"]}, async({request}) => {
-    const token = await loginAndReturnToken(request);
+test(`product_api`,{tag:["@smoke, @api"]}, async({APILogin, APIProducts}) => {
+    const token = await APILogin.loginWith({
+        username: process.env.ADMIN_USER, 
+        password: process.env.ADMIN_PASS
+    });
     
     const createProductResponse = await test.step(`create product`, async () => {
-        const createProductResponse = await request.post(apiConfig.baseURL + apiConfig.endpoints.product.create, {
-            data: createRandomProductData(),
-            headers: {
-                "content-type": "application/json",
-                Authorization: `Bearer ${token}`,
-            }
-        });
-
-        await validateResponse(createProductResponse, {
-            status: STATUS_CODES.CREATED,
-            schema: createProductSchema,
-            IsSuccess: true,
-            ErrorMessage: null,
-        });    
-
-        return createProductResponse;    
+        return await APIProducts.createProduct(token);
     });
 
-
     const getAllProductResponse = await test.step(`get products`, async () => {
-        const getAllProductResponse =  await request.get(apiConfig.baseURL + apiConfig.endpoints.product.get, {
-            headers: {
-                "content-type": "application/json",
-                Authorization: `Bearer ${token}`,
-            }
-        });
-
-        await validateResponse(getAllProductResponse, {
-            status: STATUS_CODES.SUCCESS,
-            schema: getProductsSchema,
-            IsSuccess: true,
-            ErrorMessage: null,
-        });
-
-        return getAllProductResponse;
+        return await APIProducts.getAllProduct(token);
     });
 
     await test.step(`check created product in product list`, async () => {
-        const createProductResponseBody = await getTypedJson<ProductResponse>(createProductResponse);
+        const createProductResponseBody = await APIProducts.getTypedJson<ProductResponse>(createProductResponse);
         const createdProducId = createProductResponseBody.Product._id
 
-        const getAllProductResponseBody = await getTypedJson<ProductListResponse>(getAllProductResponse);
+        const getAllProductResponseBody = await APIProducts.getTypedJson<ProductListResponse>(getAllProductResponse);
         const productIds = getAllProductResponseBody.Products.map(product => product._id);
 
         expect(productIds).toContain(createdProducId)

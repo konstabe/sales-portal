@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { MANUFACTURERS } from "../../common/manufactures";
+import { MANUFACTURERS } from "./manufactures";
 
 const getRandomManufacture = () => {
     const values = Object.values(MANUFACTURERS);
