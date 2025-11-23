@@ -7,7 +7,7 @@ test.describe("tests", () => {
     test("add_product", async ({productsPage, loginPage, homePage, page}) => {
         await page.goto(`${process.env.BASE_URL}/#/login`);
 
-        await loginPage.logWith(process.env.ADMIN_USER, process.env.ADMIN_PASS);
+        await loginPage.logWith();
         
         await homePage.navigateTo("Products");
 
