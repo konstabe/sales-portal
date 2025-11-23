@@ -3,16 +3,20 @@ import { IProductDetails } from "data/types/product.types";
 import _ from "lodash";
 import { AddNewProductPage } from "ui/pages/products/addNewProduct.page";
 import { ProductsListPage } from "ui/pages/products/productsList.page";
+import { UpdateProductPage } from "ui/pages/products/updateProduct.page";
 import { convertToFullDateAndTime } from "utils/date.utils";
 import { logStep } from "utils/report/logStep.utils";
 
 export class ProductsListUIService {
   productsListPage: ProductsListPage;
   addNewProductPage: AddNewProductPage;
+  updateProductPage: UpdateProductPage;
+
 
   constructor(private page: Page) {
     this.productsListPage = new ProductsListPage(page);
     this.addNewProductPage = new AddNewProductPage(page);
+    this.updateProductPage = new UpdateProductPage(page);
   }
 
   @logStep("Open Add New Product Page")
@@ -51,8 +55,13 @@ export class ProductsListUIService {
 
   @logStep("Open Products List Page")
   async open() {
-    await this.productsListPage.open("products");
+    await this.productsListPage.open("#/products");
     await this.productsListPage.waitForOpened();
+  }
+
+  async clickEdit(productName: string) {
+    await this.productsListPage.clickAction(productName, "edit");
+    await this.updateProductPage.waitForOpened();
   }
 
   assertDetailsData(actual: IProductDetails, expected: IProductDetails) {
