@@ -1,3 +1,4 @@
+import { TAGS } from 'data/tags';
 import { test, expect } from 'fixtures/business.fixture';
 import { generateMetricsResponse } from 'utils/generateMetricsResponse';
 
@@ -46,7 +47,7 @@ test.describe('[Integration] [Sales Portal] [Home] Metrics', () => {
   });
 
   for (const [title, locator, expected] of cases) {
-    test(title, async ({ homePage, page }) => {
+    test(title, {tag: TAGS.VISUAL},async ({ homePage, page }) => {
         await page.pause();
       await expect(homePage[locator]).toHaveText(expected);
     });

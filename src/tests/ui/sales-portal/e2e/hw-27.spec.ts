@@ -1,9 +1,10 @@
 import { test,expect } from "fixtures/index";
 import { NOTIFICATIONS } from "data/salesPortal/notifications";
+import { TAGS } from "data/tags";
 
 test.describe("[Sales Portal] [Products]", () => {
 
-  test("HW_27_TASK_1 Add new product with services", async ({
+  test("HW_27_TASK_1 Add new product with services",{tag: TAGS.SMOKE}, async ({
     loginUIService,
     productsListPage,
     productsListUIService,
@@ -37,7 +38,7 @@ productsApiService
     }
   });
 
-  test("HW_27_TASK_2 Update product with services", async ({
+  test("HW_27_TASK_2 Update product with services",{tag: TAGS.SMOKE}, async ({
     loginUIService,
     productsApiService,
     productsListPage,

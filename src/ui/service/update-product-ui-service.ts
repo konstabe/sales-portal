@@ -8,6 +8,7 @@ import { expect } from "fixtures";
 import _ from "lodash";
 import { ProductsListPage } from "ui/pages/products";
 import { UpdateProductPage } from "ui/pages/products/updateProduct.page";
+import { logStep } from "utils/report/logStep.utils";
 
 export class UpdateProductUIService {
   private readonly updateProductPage: UpdateProductPage;
@@ -18,11 +19,13 @@ export class UpdateProductUIService {
     this.productsListPage = new ProductsListPage(page);
   }
 
+  @logStep("Open update product page")
   async openAddForm() {
     await this.updateProductPage.open("products/add");
     await this.updateProductPage.waitForOpened();
   }
-
+  
+  @logStep("Update product")
   async update(overrides?: Partial<IProduct>) {
     const data = generateProductData(overrides);
 

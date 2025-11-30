@@ -1,4 +1,5 @@
-import test, { expect } from "@playwright/test";
+import { TAGS } from "data/tags";
+import { test, expect } from "fixtures/business.fixture";
 import { credentials } from "config/env";
 import { NOTIFICATIONS } from "data/salesPortal/notifications";
 import { generateProductData } from "data/salesPortal/products/generateProductData";
@@ -8,7 +9,7 @@ import { AddNewProductPage } from "ui/pages/products/addNewProduct.page";
 import { ProductsListPage } from "ui/pages/products/productsList.page";
 
 test.describe("[Sales Portal] [Products]", () => {
-  test("Table parsing", async ({ page }) => {
+  test("Table parsing", {tag: TAGS.REGRESSION},async ({ page }) => {
     const homePage = new HomePage(page);
     const productsListPage = new ProductsListPage(page);
     const addNewProductPage = new AddNewProductPage(page);

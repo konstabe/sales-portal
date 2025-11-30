@@ -2,12 +2,13 @@ import { test, expect } from "fixtures/business.fixture";
 import { NOTIFICATIONS } from "data/salesPortal/notifications";
 import { generateProductData } from "data/salesPortal/products/generateProductData";
 import _ from "lodash";
+import { TAGS } from "data/tags";
 
 test.describe("[Sales Portal] [Products]", () => {
   let id = "";
   let token = "";
   //test with fixtures version 1
-  test("Product Details", async ({ loginAsAdmin, homePage, productsListPage, addNewProductPage }) => {
+  test("Product Details", {tag: TAGS.REGRESSION},async ({ loginAsAdmin, homePage, productsListPage, addNewProductPage }) => {
     //login page
     // const emailInput = page.locator("#emailinput");
     // const passwordInput = page.locator("#passwordinput");

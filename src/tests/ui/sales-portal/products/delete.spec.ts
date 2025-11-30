@@ -1,9 +1,10 @@
 import { NOTIFICATIONS } from "data/salesPortal/notifications";
 import { STATUS_CODES } from "data/statusCodes";
 import { expect, test } from "fixtures/business.fixture";
+import { TAGS } from "data/tags";
 
 test.describe("[Sales Portal] [Products]", () => {
-  test("Delete", async ({
+  test("Delete", {tag: TAGS.REGRESSION},async ({
     loginUIService,
     productsListUIService,
     homeUIService,
