@@ -18,7 +18,7 @@ export class LoginUIService {
   }
 
   async login(credentials: ICredentials) {
-    await this.loginPage.open();
+    await this.loginPage.open("");
     await this.loginPage.fillCredentials(credentials);
     await this.loginPage.clickLogin();
     await this.homePage.waitForOpened();
