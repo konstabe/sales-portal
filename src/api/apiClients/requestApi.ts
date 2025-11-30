@@ -2,6 +2,7 @@ import { APIRequestContext, APIResponse, test } from "@playwright/test";
 import { IRequestOptions, IResponse } from "data/types/core.types";
 import { BaseApiClient } from "./baseApiClient";
 import _ from "lodash";
+import { logStep } from "utils/report/logStep.utils";
 
 export class RequestApi extends BaseApiClient {
   constructor(private requestContext: APIRequestContext) {
@@ -32,6 +33,7 @@ export class RequestApi extends BaseApiClient {
     }
   }
 
+  @logStep("Transform response")
   protected async transformResponse() {
     let body;
     const contentType = this.response!.headers()["content-type"] || "";
@@ -48,6 +50,7 @@ export class RequestApi extends BaseApiClient {
     };
   }
 
+  @logStep("Attach request")
   private async attachRequest(options: IRequestOptions) {
     await this.testInfo().attach(`Request ${options.method.toUpperCase()} ${options.url}`, {
       body: JSON.stringify(
@@ -62,6 +65,7 @@ export class RequestApi extends BaseApiClient {
     });
   }
 
+  @logStep("Attach response")
   private async attachResponse<T extends object | null>(options: IRequestOptions, response: IResponse<T>) {
     await this.testInfo().attach(`Response ${response.status} ${options.method.toUpperCase()} ${options.url}`, {
       body: JSON.stringify(

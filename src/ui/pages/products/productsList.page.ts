@@ -3,6 +3,7 @@ import { SalesPortalPage } from "../salesPortal.page";
 import { MANUFACTURERS } from "data/salesPortal/products/manufacturers";
 import { ProductDetailsModal } from "./details.modal";
 import { ConfirmationModal } from "../confirmation.modal";
+import { logStep } from "utils/report/logStep.utils";
 
 export class ProductsListPage extends SalesPortalPage {
   readonly detailsModal = new ProductDetailsModal(this.page);
@@ -41,10 +42,12 @@ export class ProductsListPage extends SalesPortalPage {
 
   readonly uniqueElement = this.addNewProductButton;
 
+  @logStep("Click add new product button")
   async clickAddNewProduct() {
     await this.addNewProductButton.click();
   }
 
+  @logStep("Get product data")
   async getProductData(productName: string): Promise<IProductInTable> {
     //Variant 1
     // return {
@@ -78,6 +81,7 @@ export class ProductsListPage extends SalesPortalPage {
     };
   }
 
+  @logStep("Get table data")
   async getTableData(): Promise<IProductInTable[]> {
     const data: IProductInTable[] = [];
 
@@ -94,20 +98,24 @@ export class ProductsListPage extends SalesPortalPage {
     return data;
   }
 
+  @logStep("Click action button")
   async clickAction(productName: string, button: "edit" | "delete" | "details") {
     if (button === "edit") await this.editButton(productName).click();
     if (button === "delete") await this.deleteButton(productName).click();
     if (button === "details") await this.detailsButton(productName).click();
   }
 
+  @logStep("Click table header")
   async clickTableHeader(name: ProductsTableHeader) {
     await this.tableHeaderNamed(name).click();
   }
 
+  @logStep("Fill search input")
   async fillSearchInput(text: string) {
     await this.searchInput.fill(text);
   }
 
+  @logStep("Click search button")
   async clickSearch() {
     await this.searchButton.click();
   }

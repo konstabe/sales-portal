@@ -1,5 +1,6 @@
 import { IProduct } from "data/types/product.types";
 import { SalesPortalPage } from "../salesPortal.page";
+import { logStep } from "utils/report/logStep.utils";
 
 export class UpdateProductPage extends SalesPortalPage {
   readonly title = this.page.getByRole("heading", { level: 2 });
@@ -12,6 +13,7 @@ export class UpdateProductPage extends SalesPortalPage {
 
   readonly uniqueElement = this.title;
 
+  @logStep("Fill form")
   async fillForm(data: Partial<IProduct>) {
     const entries: [keyof IProduct, unknown][] = Object.entries(data) as any;
 
@@ -38,6 +40,7 @@ export class UpdateProductPage extends SalesPortalPage {
     }
   }
 
+  @logStep("Click save button")
   async clickSave() {
     await Promise.all([
       this.page.waitForResponse(res =>

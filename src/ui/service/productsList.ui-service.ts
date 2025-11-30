@@ -45,6 +45,7 @@ export class ProductsListUIService {
     await this.productsListPage.deleteModal.waitForClosed();
   }
 
+  @logStep("Search")
   async search(text: string) {
     await test.step(`Search for "${text}" on Products List page`, async () => {
       await this.productsListPage.fillSearchInput(text);
@@ -59,6 +60,7 @@ export class ProductsListUIService {
     await this.productsListPage.waitForOpened();
   }
 
+  @logStep("Click edit")
   async clickEdit(productName: string) {
     await this.productsListPage.clickAction(productName, "edit");
     await this.updateProductPage.waitForOpened();
@@ -71,6 +73,7 @@ export class ProductsListUIService {
     });
   }
 
+  @logStep("Assert product in table")
   async assertProductInTable(productName: string, { visible }: { visible: boolean }) {
     await expect(
       this.productsListPage.tableRowByName(productName),
